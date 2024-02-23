@@ -11,11 +11,15 @@ namespace Stamina.SecondMenu
         string startText = "Выберите режим";
         string aWords = "1. ва ол";
         string bWords = "2. фы дж";
-        string bWords = "3. фы дж";
-        string bWords = "2. фы дж";
-        string bWords = "2. фы дж";
-        string bWords = "2. фы дж";
-        string bWords = "2. фы дж";
+        string сWords = "3. ми ть";
+        string вWords = "4. еп нр";
+        string eWords = "5. ук гш";
+        string fWords = "6. чс бю";
+        string gWords = "7. йц щз";
+        string YaWords = "8. я зхъ";
+        string shortWords = "9. короткие слова";
+        string longWords = "10. длинные слова";
+        string examsWords = "11. экзамен";
         string exitText = "назад";
 
         bool end = false;

@@ -60,6 +60,8 @@ namespace Stamina.Main
             speedOfWrite = text.score / endTime;
             Console.WriteLine("ваш результат: " + speedOfWrite + " букв в мин");
             Console.WriteLine("количество ошибок: " + text.mistakes);
+            Console.WriteLine("\n\n\n нажмите enter чтобы продолжить");
+            Console.ReadLine();
         }
         
     }
