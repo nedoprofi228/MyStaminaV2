@@ -3,23 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Stamina.Main.Main;
 
 namespace Stamina.SecondMenu
 {
     internal class SecondMenus
     {
         string startText = "Выберите режим";
-        string aWords = "1. ва ол";
-        string bWords = "2. фы дж";
-        string сWords = "3. ми ть";
-        string вWords = "4. еп нр";
-        string eWords = "5. ук гш";
-        string fWords = "6. чс бю";
-        string gWords = "7. йц щз";
-        string YaWords = "8. я зхъ";
-        string shortWords = "9. короткие слова";
-        string longWords = "10. длинные слова";
-        string examsWords = "11. экзамен";
         string exitText = "назад";
 
         bool end = false;
@@ -31,30 +21,17 @@ namespace Stamina.SecondMenu
         {
             Console.Clear();
             Console.WriteLine(startText);
-            if (user == 0)
+            for(int i = 0; i < lstOfText.Count; i++)
             {
-                ChooseVar("=> " + aWords);
+                if (i == user)
+                    ChooseVar($"=> {lstOfText[i].name}");
+                else
+                    Console.WriteLine(lstOfText[i].name);
             }
+            if (user == lstOfText.Count)
+                ChooseVar(exitText);
             else
-            {
-                Console.WriteLine(aWords);
-            }
-            if (user == 1)
-            {
-                ChooseVar("=> " + bWords);
-            }
-            else
-            {
-                Console.WriteLine(bWords);
-            }
-            if (user == 2)
-            {
-                ChooseVar("=> " + exitText);
-            }
-            else
-            {
                 Console.WriteLine(exitText);
-            }
         }
         void ChooseVar(string text)
         {
@@ -88,7 +65,7 @@ namespace Stamina.SecondMenu
             }
             if (key == ConsoleKey.S)
             {
-                if (user < 2)
+                if (user < lstOfText.Count)
                     user++;
             }
             if (key == ConsoleKey.Enter)

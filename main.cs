@@ -8,14 +8,31 @@ namespace Stamina.Main
 {
     public class Main
     {
-        Text text;
+        public static List<Text> lstOfText = new();
         Stopwatch stopwatch = new();
         MainMenu menu = new MainMenu();
         SecondMenus secondMenus = new SecondMenus();
 
+        int score;
+        int mistakes;
         int speedOfWrite;
-        int endTime = new();
+        int endTime;
         int choosePlayer;
+
+        public Main()
+        {
+            lstOfText.Add(new Text("ва ол", "BAOL.txt"));
+            lstOfText.Add(new Text("фы дж", "ФЫДЖ.txt"));
+            lstOfText.Add(new Text("ми ть", "Mi.txt"));
+            lstOfText.Add(new Text("еп нр", "EP.txt"));
+            lstOfText.Add(new Text("ук гш", "YK.txt"));
+            lstOfText.Add(new Text("чс бю", "ЧС.txt"));
+            lstOfText.Add(new Text("йц щз", "ЙЦ.txt"));
+            lstOfText.Add(new Text("я зхъ", "Я.txt"));
+            lstOfText.Add(new Text("короткие слова", "корслова.txt"));
+            lstOfText.Add(new Text("длинные слова", "длинслова.txt"));
+            lstOfText.Add(new Text("экзамен", "экзамен.txt"));
+        }
         public void Start()
         {
             while (true)
@@ -24,21 +41,16 @@ namespace Stamina.Main
                 if (choosePlayer == 0)
                 {
                     choosePlayer = secondMenus.Start();
-                    if (choosePlayer == 0)
+                    for(int i = 0; i < lstOfText.Count; i++)
                     {
-                        text = new Text(choosePlayer);
-                        stopwatch.Start();
-                        text.Start(End);
-                        choosePlayer = 0;
+                        if(choosePlayer == i)
+                        {
+                            choosePlayer = 0;
+                            stopwatch.Start();
+                            (score, mistakes) = lstOfText[i].Start(End);
+                        }
                     }
-                    else if (choosePlayer == 1)
-                    {
-                        text = new Text(choosePlayer);
-                        stopwatch.Start();
-                        text.Start(End);
-                        choosePlayer = 0;
-                    }
-                    else if(choosePlayer == 2)
+                    if(choosePlayer == lstOfText.Count)
                     {
                         choosePlayer = 0;
                         continue;
@@ -57,9 +69,9 @@ namespace Stamina.Main
             endTime = (int)(stopwatch.ElapsedMilliseconds / 6000);
             Console.Clear();
             Console.WriteLine("вы написали весь текст!");
-            speedOfWrite = text.score / endTime;
+            speedOfWrite = score / endTime;
             Console.WriteLine("ваш результат: " + speedOfWrite + " букв в мин");
-            Console.WriteLine("количество ошибок: " + text.mistakes);
+            Console.WriteLine("количество ошибок: " + mistakes);
             Console.WriteLine("\n\n\n нажмите enter чтобы продолжить");
             Console.ReadLine();
         }

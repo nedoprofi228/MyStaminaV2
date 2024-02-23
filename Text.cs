@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.IO;
+using System.Globalization;
 
 namespace Stamina.Texts
  {
@@ -10,27 +11,16 @@ namespace Stamina.Texts
         public int score = 0;
         public int mistakes = 0;
 
-        
-
-        string BAOLText = "BAOL.txt";
-        string FDText = "ФЫДЖ.txt";
-        string shortWords = "корслова.txt";
-        string longWords = "длинслова.txt";
-        string miWords = "Mi.txt";
-        string EpWords = "EP.txt";
-        string YKWords = "YK.txt";
-        string ZWords = "ЙЦ.txt";
-        string CHWords = "ЧС.txt";
-        string YAWords = "Я.txt";
-        string ExamsWords = "экзамен.txt";
+        public string name;
+        public string fileName;
 
         public char? user;
         bool end = false;
-        public Text(){
-            ReadTextFromFile(0);
-        }
-        public Text(int vars){
-            ReadTextFromFile(vars);
+
+        public Text(string name, string fileName){
+            this.name = name;
+            this.fileName = fileName;
+            ReadTextFromFile();
         }
         public bool ChecksymvolAndEnd(char? key){
             if (text.Length <= 0){
@@ -56,7 +46,7 @@ namespace Stamina.Texts
                text = text.Substring(1); 
             }
         }
-        public int Start(EndFunc End)
+        public (int, int) Start(EndFunc End)
         {
             Console.Clear();
             ShowText();
@@ -80,44 +70,11 @@ namespace Stamina.Texts
                     CheckSpacebar();
                 }
             }
-            return 0;
+            return (score, mistakes);
         }
-        void ReadTextFromFile(int vars)
+        void ReadTextFromFile()
         {
-            string path = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().Length - 16) + "\\texts\\";
-            switch (vars)
-            {
-                case 0:
-                    path += BAOLText;
-                    break;
-                case 1:
-                    path += FDText;
-                    break;
-                case 2:
-                    path += miWords;
-                    break;
-                case 3:
-                    path += EpWords;
-                    break;
-                case 4:
-                    path += YKWords;
-                    break;
-                case 5:
-                    path += CHWords;
-                    break;
-                case 6:
-                    path += ZWords;
-                    break;
-                case 7:
-                    path += YAWords;
-                    break;
-                case 8:
-                    path += shortWords;
-                    break;
-                case 9:
-                    path += longWords;
-                    break;
-            }
+            string path = Directory.GetCurrentDirectory() + "\\texts\\" + fileName;
             using (StreamReader reader = new StreamReader(path))
             {
                 this.text = reader.ReadToEnd();
